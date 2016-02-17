@@ -32,3 +32,8 @@ Makefile*
 #QtCtreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
+
+# Custom
+.ycm_extra_conf*
+Eliminato
+build.sh
