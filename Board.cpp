@@ -40,7 +40,7 @@ QList<int> Board::getDividingPoints()
         for (int i = 0; i < NUM_COLORS - 1; ++i)
             dividingPoints.append(std::rand());
         dividingPoints.append(0);
-        dividingPoints.append(INFINITY);
+        dividingPoints.append(RAND_MAX);
         std::sort(dividingPoints.begin(), dividingPoints.end());
         for (int i = 0; i < NUM_COLORS; ++i) {
             // check whether the random is too uneven

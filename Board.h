@@ -11,9 +11,8 @@ const int NUM_COLORS = 5;
 const int TILE_SIZE = 39;
 const int BORDER_SIZE = 1;
 
-const int INFINITY = 0x7fffffff;
-const int MAX_DISTANCE = INFINITY * 0.45;
-const int MIN_DISTANCE = INFINITY * 0.07;
+const int MAX_DISTANCE = RAND_MAX * 0.45;
+const int MIN_DISTANCE = RAND_MAX * 0.07;
 
 class Tile;
 
