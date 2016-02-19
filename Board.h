@@ -16,6 +16,7 @@ class Board : public QObject {
 
 public:
     Board(QWidget* widget);
+    Tile* atPosition(int i, int j);
 
 public slots:
     void reset();

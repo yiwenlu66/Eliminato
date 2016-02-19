@@ -3,9 +3,11 @@
 #include <QWidget>
 #include <QLabel>
 
-Tile::Tile(Board* board, QWidget* pParent, Qt::WindowFlags f)
+Tile::Tile(Board* board, int i, int j, QWidget* pParent, Qt::WindowFlags f)
     : QLabel(pParent, f)
-    , m_board(board){};
+    , m_board(board)
+    , m_i(i)
+    , m_j(j){};
 
 int Tile::color()
 {
@@ -40,4 +42,41 @@ void Tile::setColor(int color)
         // purple
         this->setStyleSheet("QLabel {background-color: rgb(184, 84, 230);}");
     }
+}
+
+
+// edge cases will be handled by Board::atPosition
+
+Tile* Tile::left()
+{
+    return m_board->atPosition(m_i, m_j - 1);
+}
+
+Tile* Tile::right()
+{
+    return m_board->atPosition(m_i, m_j + 1);
+}
+
+Tile* Tile::up()
+{
+    return m_board->atPosition(m_i - 1, m_j);
+}
+
+Tile* Tile::down()
+{
+    return m_board->atPosition(m_i + 1, m_j);
+}
+
+bool Tile::clickable()
+{
+    if (!m_color)
+        return false;
+    typedef Tile* (Tile::*directionFunc)();
+    directionFunc directions[4] = {&Tile::left, &Tile::right, &Tile::up, &Tile::down};
+    for (int i = 0; i < 4; ++i) {
+        Tile* neighbor = (this->*directions[i])();
+        if (neighbor != NULL && neighbor->color() == m_color)
+            return true;
+    }
+    return false;
 }
