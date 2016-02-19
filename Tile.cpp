@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QQueue>
+#include <ctime>
 
 typedef Tile* (Tile::*directionFunc)();
 directionFunc DIRS[4] = { &Tile::left, &Tile::right, &Tile::up, &Tile::down };
@@ -14,6 +15,7 @@ Tile::Tile(Board* board, int i, int j, QWidget* pParent, Qt::WindowFlags f)
     , m_j(j)
 {
     connect(this, SIGNAL(clicked()), this, SLOT(eliminate()));
+    QLabel::setAlignment(Qt::AlignCenter);
 }
 
 void Tile::mousePressEvent(QMouseEvent* event)
@@ -30,8 +32,12 @@ void Tile::setColor(int color)
 {
     m_color = color;
     switch (color) {
+    case -1:
+        // grey, temporary
+        this->setStyleSheet("QLabel {background-color: rgb(180, 180, 180);}");
+        break;
     case 0:
-        // grey
+        // white
         this->setStyleSheet("QLabel {background-color: rgb(255, 255, 255);}");
         break;
     case 1:
@@ -107,6 +113,23 @@ void Tile::eliminate()
         markedQueue.enqueue(current);
     }
 
-    foreach (Tile* tile, markedQueue)
+    int numEliminated = markedQueue.length();
+
+    foreach (Tile* tile, markedQueue) {
+        tile->setColor(-1);
+        tile->setText(QString("+%1").arg(numEliminated));
+    }
+
+    foreach (Tile* tile, markedQueue) {
+        tile->repaint();
+    }
+
+    // sleep for 0.5 seconds
+    clock_t t0 = clock();
+    while (static_cast<double>(clock() - t0) / CLOCKS_PER_SEC < 0.5)
+        ;
+
+    foreach (Tile* tile, markedQueue) {
         tile->setColor(0);
+    }
 }
