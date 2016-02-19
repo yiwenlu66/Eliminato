@@ -11,9 +11,14 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow();
 
+public slots:
+    void resetCurrentScore();
+    int increaseScoreBy(int delta);
+
 private:
     Board* board;
     Ui::MainWindow ui;
+    int currentScore, maxScore;
 };
 
 #endif

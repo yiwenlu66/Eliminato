@@ -18,8 +18,13 @@ public:
     Board(QWidget* widget);
     Tile* atPosition(int i, int j);
 
+signals:
+    void resetUiScore();
+    void increaseUiScoreBy(int delta);
+
 public slots:
     void reset();
+    void scoreIncreased(int delta);
 
 private:
     QWidget* m_widget;

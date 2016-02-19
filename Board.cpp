@@ -36,6 +36,7 @@ void Board::reset()
     for (int i = 0; i < N; ++i)
         for (int j = 0; j < N; ++j)
             m_tile[i][j]->setColor(std::rand() % 5 + 1);
+    emit resetUiScore();
 }
 
 Tile* Board::atPosition(int i, int j)
@@ -43,4 +44,9 @@ Tile* Board::atPosition(int i, int j)
     if (0 <= i && i < N && 0 <= j && j < N)
         return m_tile[i][j];
     return NULL;
+}
+
+void Board::scoreIncreased(int delta)
+{
+    emit increaseUiScoreBy(delta);
 }

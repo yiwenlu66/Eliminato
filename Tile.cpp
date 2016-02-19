@@ -16,6 +16,7 @@ Tile::Tile(int i, int j, QWidget* pParent, Qt::WindowFlags f)
     , m_j(j)
 {
     connect(this, SIGNAL(clicked()), this, SLOT(eliminate()));
+    connect(this, SIGNAL(scoreIncreased(int)), Tile::s_board, SLOT(scoreIncreased(int)));
     QLabel::setAlignment(Qt::AlignCenter);
 }
 
@@ -132,5 +133,8 @@ void Tile::eliminate()
 
     foreach (Tile* tile, markedQueue) {
         tile->setColor(0);
+        tile->setText("");
     }
+
+    emit scoreIncreased(numEliminated * numEliminated);
 }

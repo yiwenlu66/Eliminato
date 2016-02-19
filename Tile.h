@@ -23,6 +23,7 @@ public:
 
 signals:
     void clicked();
+    void scoreIncreased(int delta);
 
 protected:
     void mousePressEvent(QMouseEvent* event);
