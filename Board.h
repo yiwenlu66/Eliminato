@@ -3,11 +3,17 @@
 
 #include <QObject>
 #include <QWidget>
+#include <QList>
 #include "Tile.h"
 
 const int N = 10;
+const int NUM_COLORS = 5;
 const int TILE_SIZE = 39;
 const int BORDER_SIZE = 1;
+
+const int INFINITY = 0x7fffffff;
+const int MAX_DISTANCE = INFINITY * 0.45;
+const int MIN_DISTANCE = INFINITY * 0.07;
 
 class Tile;
 
@@ -36,6 +42,7 @@ private:
     void moveTile(int oldI, int oldJ, int newI, int newJ);
     void moveColumn(int oldI, int newI);
     bool isGameOver();
+    QList<int> getDividingPoints();
 };
 
 #endif

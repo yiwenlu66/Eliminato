@@ -3,6 +3,7 @@
 #include <ctime>
 #include <QWidget>
 #include <cassert>
+#include <algorithm>
 
 Board::Board(QWidget* widget)
     : m_widget(widget)
@@ -31,12 +32,43 @@ Board::Board(QWidget* widget)
     reset();
 }
 
+QList<int> Board::getDividingPoints()
+{
+    bool legal = true;
+    while (true) {
+        QList<int> dividingPoints;
+        for (int i = 0; i < NUM_COLORS - 1; ++i)
+            dividingPoints.append(std::rand());
+        dividingPoints.append(0);
+        dividingPoints.append(INFINITY);
+        std::sort(dividingPoints.begin(), dividingPoints.end());
+        for (int i = 0; i < NUM_COLORS; ++i) {
+            // check whether the random is too uneven
+            if (dividingPoints[i + 1] - dividingPoints[i] > MAX_DISTANCE
+                || dividingPoints[i + 1] - dividingPoints[i] < MIN_DISTANCE) {
+                legal = false;
+            }
+        }
+        if (legal)
+            return dividingPoints;
+        legal = true;
+    }
+}
+
 void Board::reset()
 {
     std::srand(std::time(0));
+    QList<int> dividingPoints = getDividingPoints();
     for (int i = 0; i < N; ++i)
-        for (int j = 0; j < N; ++j)
-            m_tile[i][j]->setColor(std::rand() % 5 + 1);
+        for (int j = 0; j < N; ++j) {
+            int currentRand = std::rand();
+            for (int dividingPointIndex = 0; dividingPointIndex < NUM_COLORS; ++dividingPointIndex) {
+                if (dividingPoints[dividingPointIndex] <= currentRand
+                    && currentRand <= dividingPoints[dividingPointIndex + 1]) {
+                    m_tile[i][j]->setColor(dividingPointIndex + 1);
+                }
+            }
+        }
     emit resetUiScore();
 }
 
