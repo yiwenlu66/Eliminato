@@ -7,6 +7,7 @@ MainWindow::MainWindow()
 {
     ui.setupUi(this);
     createBoard();
+    connect(ui.restartButton, SIGNAL(clicked()), this, SLOT(resetBoard()));
 }
 
 void MainWindow::createBoard()
