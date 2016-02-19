@@ -3,11 +3,7 @@
 
 #include <QMainWindow>
 #include "ui_mainwindow.h"
-#include "Tile.h"
-
-const int N = 10;
-const int TILE_SIZE = 39;
-const int BORDER_SIZE = 1;
+#include "Board.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -15,13 +11,9 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow();
 
-public slots:
-    void resetBoard();
-
 private:
-    Tile* m_tile[N][N];
+    Board* board;
     Ui::MainWindow ui;
-    void createBoard();
 };
 
 #endif
