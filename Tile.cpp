@@ -11,26 +11,26 @@ void Tile::setColor(int color)
     switch (color) {
     case 0:
         // grey
-        this->setStyleSheet("QLabel {background-color: rgb(240, 240, 240);}");
+        this->setStyleSheet("QLabel {background-color: rgb(255, 255, 255);}");
         break;
     case 1:
         // red
-        this->setStyleSheet("QLabel {background-color: rgb(255, 90, 90);}");
+        this->setStyleSheet("QLabel {background-color: rgb(244, 78, 78);}");
         break;
     case 2:
         // orange
-        this->setStyleSheet("QLabel {background-color: rgb(255, 170, 0);}");
+        this->setStyleSheet("QLabel {background-color: rgb(241, 163, 12);}");
         break;
     case 3:
         // blue
-        this->setStyleSheet("QLabel {background-color: rgb(90, 90, 255);}");
+        this->setStyleSheet("QLabel {background-color: rgb(40, 171, 239);}");
         break;
     case 4:
         // green
-        this->setStyleSheet("QLabel {background-color: rgb(90, 255, 90);}");
+        this->setStyleSheet("QLabel {background-color: rgb(181, 207, 38);}");
         break;
     case 5:
         // purple
-        this->setStyleSheet("QLabel {background-color: rgb(200, 50, 255);}");
+        this->setStyleSheet("QLabel {background-color: rgb(184, 84, 230);}");
     }
 }
