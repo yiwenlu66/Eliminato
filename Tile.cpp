@@ -94,15 +94,19 @@ void Tile::eliminate()
 {
     if (!clickable())
         return;
-    QQueue<Tile*> bfsQueue;
+    QQueue<Tile *> bfsQueue, markedQueue;
     bfsQueue.enqueue(this);
     while (!bfsQueue.empty()) {
         Tile* current = bfsQueue.dequeue();
         for (int i = 0; i < 4; ++i) {
             Tile* neighbor = (current->*DIRS[i])();
-            if (neighbor != NULL && neighbor->color() == current->color() && !bfsQueue.contains(neighbor))
+            if (neighbor != NULL && neighbor->color() == current->color()
+                && !bfsQueue.contains(neighbor) && !markedQueue.contains(neighbor))
                 bfsQueue.enqueue(neighbor);
         }
-        current->setColor(0);
+        markedQueue.enqueue(current);
     }
+
+    foreach (Tile* tile, markedQueue)
+        tile->setColor(0);
 }
