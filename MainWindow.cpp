@@ -1,4 +1,6 @@
 #include "MainWindow.h"
+#include <cstdlib>
+#include <ctime>
 
 MainWindow::MainWindow()
     : QMainWindow()
@@ -26,7 +28,8 @@ void MainWindow::createBoard()
 
 void MainWindow::resetBoard()
 {
+    std::srand(std::time(0));
     for (int i = 0; i < N; ++i)
         for (int j = 0; j < N; ++j)
-            m_tile[i][j]->setColor((i + j) % 6);
+            m_tile[i][j]->setColor(std::rand() % 5 + 1);
 }
