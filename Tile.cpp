@@ -1,4 +1,11 @@
 #include "Tile.h"
+#include "Board.h"
+#include <QWidget>
+#include <QLabel>
+
+Tile::Tile(Board* board, QWidget* pParent, Qt::WindowFlags f)
+    : QLabel(pParent, f)
+    , m_board(board){};
 
 int Tile::color()
 {

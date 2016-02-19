@@ -11,7 +11,7 @@ Board::Board(QWidget* widget)
     for (i = 0; i < N; ++i) {
         hor = 0;
         for (j = 0; j < N; ++j) {
-            Tile* tile = new Tile(widget);
+            Tile* tile = new Tile(this, widget);
             tile->setGeometry(hor, ver, TILE_SIZE, TILE_SIZE);
             tile->setStyleSheet("QLabel {border-width: 1px; border-style: solid;\
                     border-color: rgb(255, 255, 255);}");
