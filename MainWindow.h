@@ -18,7 +18,7 @@ public slots:
     void resetBoard();
 
 private:
-    Tile* tile[N][N];
+    Tile* m_tile[N][N];
     Ui::MainWindow ui;
 };
 
