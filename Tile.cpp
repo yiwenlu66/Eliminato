@@ -2,12 +2,24 @@
 #include "Board.h"
 #include <QWidget>
 #include <QLabel>
+#include <QQueue>
+
+typedef Tile* (Tile::*directionFunc)();
+directionFunc DIRS[4] = { &Tile::left, &Tile::right, &Tile::up, &Tile::down };
 
 Tile::Tile(Board* board, int i, int j, QWidget* pParent, Qt::WindowFlags f)
     : QLabel(pParent, f)
     , m_board(board)
     , m_i(i)
-    , m_j(j){};
+    , m_j(j)
+{
+    connect(this, SIGNAL(clicked()), this, SLOT(eliminate()));
+}
+
+void Tile::mousePressEvent(QMouseEvent* event)
+{
+    emit clicked();
+}
 
 int Tile::color()
 {
@@ -44,7 +56,6 @@ void Tile::setColor(int color)
     }
 }
 
-
 // edge cases will be handled by Board::atPosition
 
 Tile* Tile::left()
@@ -71,12 +82,27 @@ bool Tile::clickable()
 {
     if (!m_color)
         return false;
-    typedef Tile* (Tile::*directionFunc)();
-    directionFunc directions[4] = {&Tile::left, &Tile::right, &Tile::up, &Tile::down};
     for (int i = 0; i < 4; ++i) {
-        Tile* neighbor = (this->*directions[i])();
+        Tile* neighbor = (this->*DIRS[i])();
         if (neighbor != NULL && neighbor->color() == m_color)
             return true;
     }
     return false;
+}
+
+void Tile::eliminate()
+{
+    if (!clickable())
+        return;
+    QQueue<Tile*> bfsQueue;
+    bfsQueue.enqueue(this);
+    while (!bfsQueue.empty()) {
+        Tile* current = bfsQueue.dequeue();
+        for (int i = 0; i < 4; ++i) {
+            Tile* neighbor = (current->*DIRS[i])();
+            if (neighbor != NULL && neighbor->color() == current->color() && !bfsQueue.contains(neighbor))
+                bfsQueue.enqueue(neighbor);
+        }
+        current->setColor(0);
+    }
 }

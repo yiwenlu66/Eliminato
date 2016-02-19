@@ -7,6 +7,9 @@
 class Board;
 
 class Tile : public QLabel {
+
+    Q_OBJECT
+
 public:
     Tile(Board* board, int i, int j, QWidget* pParent = 0, Qt::WindowFlags f = 0);
     int color();
@@ -16,6 +19,15 @@ public:
     Tile* up();
     Tile* down();
     bool clickable();
+
+signals:
+    void clicked();
+
+protected:
+    void mousePressEvent(QMouseEvent* event);
+
+private slots:
+    void eliminate();
 
 private:
     Board* m_board;
