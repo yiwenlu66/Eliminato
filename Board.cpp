@@ -8,10 +8,11 @@ Board::Board(QWidget* widget)
 {
     int i, j, hor, ver;
     ver = 0;
+    Tile::s_board = this;
     for (i = 0; i < N; ++i) {
         hor = 0;
         for (j = 0; j < N; ++j) {
-            Tile* tile = new Tile(this, i, j, widget);
+            Tile* tile = new Tile(i, j, widget);
             tile->setGeometry(hor, ver, TILE_SIZE, TILE_SIZE);
             m_tile[i][j] = tile;
             hor += (TILE_SIZE + BORDER_SIZE);

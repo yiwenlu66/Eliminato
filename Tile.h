@@ -11,7 +11,8 @@ class Tile : public QLabel {
     Q_OBJECT
 
 public:
-    Tile(Board* board, int i, int j, QWidget* pParent = 0, Qt::WindowFlags f = 0);
+    Tile(int i, int j, QWidget* pParent = 0, Qt::WindowFlags f = 0);
+    static Board* s_board;
     int color();
     void setColor(int color);
     Tile* left();
@@ -30,7 +31,6 @@ private slots:
     void eliminate();
 
 private:
-    Board* m_board;
     int m_color;
     int m_i, m_j;
 };

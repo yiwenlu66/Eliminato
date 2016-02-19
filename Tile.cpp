@@ -8,9 +8,10 @@
 typedef Tile* (Tile::*directionFunc)();
 directionFunc DIRS[4] = { &Tile::left, &Tile::right, &Tile::up, &Tile::down };
 
-Tile::Tile(Board* board, int i, int j, QWidget* pParent, Qt::WindowFlags f)
+Board* Tile::s_board;
+
+Tile::Tile(int i, int j, QWidget* pParent, Qt::WindowFlags f)
     : QLabel(pParent, f)
-    , m_board(board)
     , m_i(i)
     , m_j(j)
 {
@@ -66,22 +67,22 @@ void Tile::setColor(int color)
 
 Tile* Tile::left()
 {
-    return m_board->atPosition(m_i, m_j - 1);
+    return Tile::s_board->atPosition(m_i, m_j - 1);
 }
 
 Tile* Tile::right()
 {
-    return m_board->atPosition(m_i, m_j + 1);
+    return Tile::s_board->atPosition(m_i, m_j + 1);
 }
 
 Tile* Tile::up()
 {
-    return m_board->atPosition(m_i - 1, m_j);
+    return Tile::s_board->atPosition(m_i - 1, m_j);
 }
 
 Tile* Tile::down()
 {
-    return m_board->atPosition(m_i + 1, m_j);
+    return Tile::s_board->atPosition(m_i + 1, m_j);
 }
 
 bool Tile::clickable()
