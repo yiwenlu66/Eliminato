@@ -67,22 +67,22 @@ void Tile::setColor(int color)
 
 Tile* Tile::left()
 {
-    return Tile::s_board->atPosition(m_i, m_j - 1);
+    return Tile::s_board->atPosition(m_i - 1, m_j);
 }
 
 Tile* Tile::right()
 {
-    return Tile::s_board->atPosition(m_i, m_j + 1);
+    return Tile::s_board->atPosition(m_i + 1, m_j);
 }
 
 Tile* Tile::up()
 {
-    return Tile::s_board->atPosition(m_i - 1, m_j);
+    return Tile::s_board->atPosition(m_i, m_j + 1);
 }
 
 Tile* Tile::down()
 {
-    return Tile::s_board->atPosition(m_i + 1, m_j);
+    return Tile::s_board->atPosition(m_i, m_j - 1);
 }
 
 bool Tile::clickable()

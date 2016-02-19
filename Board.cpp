@@ -12,9 +12,17 @@ Board::Board(QWidget* widget)
     for (i = 0; i < N; ++i) {
         hor = 0;
         for (j = 0; j < N; ++j) {
-            Tile* tile = new Tile(i, j, widget);
+            /*
+             * Tiles are arranged in this order:
+             * .
+             * .                .
+             * .              .
+             * [0][1]       .
+             * [0][0] [1][0]  . . .
+             */
+            Tile* tile = new Tile(j, N - 1 - i, widget);
             tile->setGeometry(hor, ver, TILE_SIZE, TILE_SIZE);
-            m_tile[i][j] = tile;
+            m_tile[j][N - 1 - i] = tile;
             hor += (TILE_SIZE + BORDER_SIZE);
         }
         ver += (TILE_SIZE + BORDER_SIZE);
