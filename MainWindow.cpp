@@ -18,11 +18,14 @@ void MainWindow::createBoard()
     for (i = 0; i < N; ++i) {
         hor = 0;
         for (j = 0; j < N; ++j) {
-            m_tile[i][j] = new Tile(baseWidget);
-            m_tile[i][j]->setGeometry(hor, ver, TILE_SIZE, TILE_SIZE);
-            hor += TILE_SIZE;
+            Tile* tile = new Tile(baseWidget);
+            tile->setGeometry(hor, ver, TILE_SIZE, TILE_SIZE);
+            tile->setStyleSheet("QLabel {border-width: 1px; border-style: solid;\
+                    border-color: rgb(255, 255, 255);}");
+            m_tile[i][j] = tile;
+            hor += (TILE_SIZE + BORDER_SIZE);
         }
-        ver += TILE_SIZE;
+        ver += (TILE_SIZE + BORDER_SIZE);
     }
     resetBoard();
 }

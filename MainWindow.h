@@ -6,7 +6,8 @@
 #include "Tile.h"
 
 const int N = 10;
-const int TILE_SIZE = 40;
+const int TILE_SIZE = 39;
+const int BORDER_SIZE = 1;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
