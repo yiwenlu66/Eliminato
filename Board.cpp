@@ -4,8 +4,8 @@
 #include <QWidget>
 
 Board::Board(QWidget* widget)
+    : m_widget(widget)
 {
-    this->widget = widget;
     int i, j, hor, ver;
     ver = 0;
     for (i = 0; i < N; ++i) {

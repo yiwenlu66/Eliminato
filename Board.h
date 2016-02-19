@@ -21,7 +21,7 @@ public slots:
     void reset();
 
 private:
-    QWidget* widget;
+    QWidget* m_widget;
     Tile* m_tile[N][N];
 };
 
