@@ -126,9 +126,9 @@ void Tile::eliminate()
         tile->repaint();
     }
 
-    // sleep for 0.5 seconds
+    // sleep
     clock_t t0 = clock();
-    while (static_cast<double>(clock() - t0) / CLOCKS_PER_SEC < 0.5)
+    while (static_cast<double>(clock() - t0) / CLOCKS_PER_SEC < TRANSITION_TIME)
         ;
 
     foreach (Tile* tile, markedQueue) {
@@ -138,9 +138,9 @@ void Tile::eliminate()
 
     emit scoreIncreased(numEliminated * numEliminated);
 
-    // sleep for 0.5 seconds
+    // sleep
     t0 = clock();
-    while (static_cast<double>(clock() - t0) / CLOCKS_PER_SEC < 0.5)
+    while (static_cast<double>(clock() - t0) / CLOCKS_PER_SEC < TRANSITION_TIME)
         ;
 
     Tile::s_board->fall();

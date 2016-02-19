@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include "GameOverDialog.h"
 
 MainWindow::MainWindow()
     : QMainWindow()
@@ -10,6 +11,8 @@ MainWindow::MainWindow()
     connect(ui.restartButton, SIGNAL(clicked()), board, SLOT(reset()));
     connect(board, SIGNAL(resetUiScore()), this, SLOT(resetCurrentScore()));
     connect(board, SIGNAL(increaseUiScoreBy(int)), this, SLOT(increaseScoreBy(int)));
+    connect(board, SIGNAL(gameOver()), this, SLOT(gameOver()));
+    connect(this, SIGNAL(resetBoard()), board, SLOT(reset()));
 }
 
 int MainWindow::increaseScoreBy(int delta)
@@ -27,4 +30,11 @@ void MainWindow::resetCurrentScore()
 {
     currentScore = 0;
     ui.currentScoreLabel->setText(QString::number(currentScore));
+}
+
+void MainWindow::gameOver()
+{
+    GameOverDialog dlg(this);
+    if (dlg.exec() == QDialog::Accepted)
+        emit resetBoard();
 }

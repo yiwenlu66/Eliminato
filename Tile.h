@@ -4,6 +4,8 @@
 #include <QLabel>
 #include "Board.h"
 
+const double TRANSITION_TIME = 0.2;
+
 class Board;
 
 class Tile : public QLabel {

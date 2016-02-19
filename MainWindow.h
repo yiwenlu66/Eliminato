@@ -11,9 +11,13 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow();
 
+signals:
+    void resetBoard();
+
 public slots:
     void resetCurrentScore();
     int increaseScoreBy(int delta);
+    void gameOver();
 
 private:
     Board* board;

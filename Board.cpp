@@ -57,6 +57,8 @@ void Board::fall()
     for (int i = 0; i < N; ++i)
         fallDown(i);
     fallLeft();
+    if (isGameOver())
+        emit gameOver();
 }
 
 void Board::fallDown(int columnIndex)
@@ -122,4 +124,13 @@ void Board::moveTile(int oldI, int oldJ, int newI, int newJ)
     assert(!m_tile[newI][newJ]->color());
     m_tile[newI][newJ]->setColor(m_tile[oldI][oldJ]->color());
     m_tile[oldI][oldJ]->setColor(0);
+}
+
+bool Board::isGameOver()
+{
+    for (int i = 0; i < N; ++i)
+        for (int j = 0; j < N; ++j)
+            if (m_tile[i][j]->clickable())
+                return false;
+    return true;
 }

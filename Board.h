@@ -22,6 +22,7 @@ public:
 signals:
     void resetUiScore();
     void increaseUiScoreBy(int delta);
+    void gameOver();
 
 public slots:
     void reset();
@@ -34,6 +35,7 @@ private:
     void fallLeft();
     void moveTile(int oldI, int oldJ, int newI, int newJ);
     void moveColumn(int oldI, int newI);
+    bool isGameOver();
 };
 
 #endif
