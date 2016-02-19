@@ -5,9 +5,12 @@
 class Tile: public QLabel
 {
     public:
-        int color;
+        int color();
+        void setColor(int color);
         Tile(QWidget *pParent=0, Qt::WindowFlags f=0): QLabel(pParent, f) {};
-        void tileDisplay();
+
+    private:
+        int m_color;
 };
 
 #endif

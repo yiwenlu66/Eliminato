@@ -16,8 +16,7 @@ void MainWindow::resetBoard()
         hor = 0;
         for (j = 0; j < N; ++j) {
             tile[i][j] = new Tile(baseWidget);
-            tile[i][j]->color = (i + j) % 2;
-            tile[i][j]->tileDisplay();
+            tile[i][j]->setColor((i + j) % 6);
             tile[i][j]->setGeometry(hor, ver, TILE_SIZE, TILE_SIZE);
             hor += TILE_SIZE;
         }
