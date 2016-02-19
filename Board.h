@@ -17,6 +17,7 @@ class Board : public QObject {
 public:
     Board(QWidget* widget);
     Tile* atPosition(int i, int j);
+    void fall();
 
 signals:
     void resetUiScore();
@@ -29,6 +30,10 @@ public slots:
 private:
     QWidget* m_widget;
     Tile* m_tile[N][N];
+    void fallDown(int columnIndex);
+    void fallLeft();
+    void moveTile(int oldI, int oldJ, int newI, int newJ);
+    void moveColumn(int oldI, int newI);
 };
 
 #endif

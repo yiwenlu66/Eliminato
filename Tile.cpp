@@ -137,4 +137,11 @@ void Tile::eliminate()
     }
 
     emit scoreIncreased(numEliminated * numEliminated);
+
+    // sleep for 0.5 seconds
+    t0 = clock();
+    while (static_cast<double>(clock() - t0) / CLOCKS_PER_SEC < 0.5)
+        ;
+
+    Tile::s_board->fall();
 }
