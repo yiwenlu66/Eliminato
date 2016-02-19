@@ -20,6 +20,7 @@ public slots:
 private:
     Tile* m_tile[N][N];
     Ui::MainWindow ui;
+    void createBoard();
 };
 
 #endif
