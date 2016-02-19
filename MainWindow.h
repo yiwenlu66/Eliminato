@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "ui_mainwindow.h"
-#include "tile.h"
+#include "Tile.h"
 
 const int N = 10;
 const int TILE_SIZE = 40;
